@@ -123,6 +123,31 @@ export function LandingPage() {
           from { opacity: 0; transform: translateX(100px); }
           to { opacity: 1; transform: translateX(0); }
         }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0px); }
+        }
+        .animate-in {
+          animation: fadeInLeft 1s ease-out forwards;
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        .animate-scale {
+          animation: scaleIn 0.5s ease-out forwards;
+        }
+        .animate-up {
+          animation: fadeInUp 1s ease-out forwards;
+        }
         .animate-in {
           animation: fadeInLeft 1s ease-out forwards;
         }
@@ -143,8 +168,8 @@ export function LandingPage() {
       <header ref={heroRef} data-direction={heroDirection} className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 md:pt-24">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center gap-4 text-center">
-            <div className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium">
-              <TypingAnimation text="🚀 사전 예약 50% 할인" />
+            <div className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium animate-float">
+              <TypingAnimation text="🚀 얼리버드 특별 할인 50% + 추가 혜택" />
             </div>
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
               <TypingAnimation text="아이디어를 서비스로 바꾸는 비밀" />
@@ -155,6 +180,20 @@ export function LandingPage() {
               <br />
               <TypingAnimation text="AI 코드 에디터 Cursor로 여러분의 아이디어를 실현하세요." />
             </p>
+            <div className="flex gap-4 mt-4 animate-scale">
+              <div className="flex items-center gap-2 text-sm">
+                <Users className="size-4" />
+                <span>1,000+ 수강생</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Clock className="size-4" />
+                <span>30일 완성</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <DollarSign className="size-4" />
+                <span>환불 보장</span>
+              </div>
+            </div>
             <div className="w-full max-w-sm space-y-2">
               <form onSubmit={handleSubmit} className="flex space-x-2">
                 <Input
@@ -174,6 +213,10 @@ export function LandingPage() {
               </p>
             </div>
           </div>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
         </div>
       </header>
 
@@ -261,31 +304,62 @@ export function LandingPage() {
 
       {/* Features Section */}
       <section ref={featuresRef} data-direction={featuresDirection} className="container px-4 py-16 md:px-6 md:py-24">
+        <h2 className="text-3xl font-bold tracking-tighter text-center mb-4">주요 기능</h2>
+        <p className="text-center text-muted-foreground mb-12 max-w-[800px] mx-auto">
+          커서 바이블은 단순한 튜토리얼이 아닌, 실전에서 바로 활용할 수 있는 실용적인 가이드를 제공합니다.
+        </p>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <Card className="animate-in" data-direction="left">
             <CardContent className="flex flex-col items-center gap-4 p-6">
-              <Code2 className="size-12 text-primary" />
+              <Code2 className="size-12 text-primary animate-float" />
               <h3 className="text-xl font-bold">기술적 장벽 해소</h3>
               <p className="text-center text-muted-foreground">
-                복잡한 코딩 없이 쉽게 시작할 수 있습니다.
+                복잡한 코딩 없이도 AI의 도움으로 웹 개발부터 앱 개발까지 쉽게 시작할 수 있습니다.
               </p>
             </CardContent>
           </Card>
           <Card className="animate-in" data-direction="right">
             <CardContent className="flex flex-col items-center gap-4 p-6">
-              <Clock className="size-12 text-primary" />
+              <Clock className="size-12 text-primary animate-float" />
               <h3 className="text-xl font-bold">시간 관리</h3>
               <p className="text-center text-muted-foreground">
-                효율적인 시간 관리 방법을 제공합니다.
+                AI를 활용한 효율적인 시간 관리로 개발 시간을 50% 이상 단축할 수 있습니다.
               </p>
             </CardContent>
           </Card>
           <Card className="animate-in" data-direction="left">
             <CardContent className="flex flex-col items-center gap-4 p-6">
-              <Sparkles className="size-12 text-primary" />
+              <Sparkles className="size-12 text-primary animate-float" />
               <h3 className="text-xl font-bold">쉬운 도구</h3>
               <p className="text-center text-muted-foreground">
-                간단하게 앱이나 웹사이트를 만들 수 있습니다.
+                직관적인 인터페이스와 AI 도움으로 복잡한 기능도 쉽게 구현할 수 있습니다.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="animate-in" data-direction="right">
+            <CardContent className="flex flex-col items-center gap-4 p-6">
+              <Users className="size-12 text-primary animate-float" />
+              <h3 className="text-xl font-bold">커뮤니티 지원</h3>
+              <p className="text-center text-muted-foreground">
+                1,000명 이상의 수강생들과 함께 성장하고 네트워킹할 수 있는 활발한 커뮤니티를 제공합니다.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="animate-in" data-direction="left">
+            <CardContent className="flex flex-col items-center gap-4 p-6">
+              <Brain className="size-12 text-primary animate-float" />
+              <h3 className="text-xl font-bold">AI 프롬프트 최적화</h3>
+              <p className="text-center text-muted-foreground">
+                AI와의 효과적인 대화 방법과 상황별 최적의 프롬프트 작성법을 실전 예제와 함께 배웁니다.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="animate-in" data-direction="right">
+            <CardContent className="flex flex-col items-center gap-4 p-6">
+              <Shield className="size-12 text-primary animate-float" />
+              <h3 className="text-xl font-bold">실전 프로젝트</h3>
+              <p className="text-center text-muted-foreground">
+                실제 서비스를 만드는 과정을 통해 배운 내용을 바로 적용하고 포트폴리오를 구축할 수 있습니다.
               </p>
             </CardContent>
           </Card>
