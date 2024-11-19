@@ -83,6 +83,16 @@ function TypingAnimation({ text, className }: { text: string; className?: string
   );
 }
 
+// Tally 타입 정의 추가
+declare global {
+  interface Window {
+    Tally: {
+      openPopup: (formId: string, options?: any) => void;
+      closePopup: (formId: string) => void;
+    };
+  }
+}
+
 export function LandingPage() {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -111,6 +121,34 @@ export function LandingPage() {
   const [testimonialsRef, testimonialsDirection] = useScrollAnimation('right');
   const [pricingRef, pricingDirection] = useScrollAnimation('left');
   const [ctaRef, ctaDirection] = useScrollAnimation('right');
+
+  const openTallyForm = () => {
+    window.Tally?.openPopup('np07lE', {
+      layout: 'default',
+      width: 400,
+      overlay: true,
+      emoji: {
+        text: '✨',
+        animation: 'wave'
+      },
+      autoClose: 3000,
+      onOpen: () => {
+        setTimeout(() => {
+          const popup = document.querySelector('.tally-popup-container');
+          if (popup) {
+            popup.classList.add('tally-popup');
+          }
+          const overlay = document.querySelector('.tally-overlay');
+          if (overlay) {
+            overlay.classList.add('tally-overlay');
+          }
+        }, 0);
+      },
+      onSubmit: () => {
+        console.log('Form submitted!');
+      }
+    });
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -162,6 +200,32 @@ export function LandingPage() {
         .animate-in[data-direction="left"] {
           animation-name: fadeInLeft;
         }
+        @keyframes slideInFromBottomRight {
+          from {
+            opacity: 0;
+            transform: translate(100px, 100px);
+          }
+          to {
+            opacity: 1;
+            transform: translate(0, 0);
+          }
+        }
+        .tally-popup {
+          position: fixed !important;
+          top: auto !important;
+          left: auto !important;
+          bottom: 30px !important;
+          right: 30px !important;
+          transform-origin: bottom right !important;
+          animation: slideInFromBottomRight 0.5s ease-out !important;
+          max-width: 400px !important;
+          border-radius: 12px !important;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+        }
+        .tally-overlay {
+          background-color: rgba(0, 0, 0, 0.5) !important;
+          backdrop-filter: blur(4px) !important;
+        }
       `}</style>
 
       {/* Hero Section */}
@@ -195,20 +259,13 @@ export function LandingPage() {
               </div>
             </div>
             <div className="w-full max-w-sm space-y-2">
-              <form onSubmit={handleSubmit} className="flex space-x-2">
-                <Input
-                  placeholder="이메일을 입력하세요"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1"
-                  required
-                />
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "제출 중..." : "예약하기"}
-                </Button>
-              </form>
-              <p className="text-xs text-muted-foreground">
+              <Button 
+                onClick={openTallyForm}
+                className="w-full"
+              >
+                50% 할인 혜택 받기
+              </Button>
+              <p className="text-xs text-muted-foreground text-center">
                 50% 할인된 가격으로 구매하실 수 있습니다.
               </p>
             </div>
@@ -458,19 +515,12 @@ export function LandingPage() {
               이메일을 입력하고 커서 바이블을 50% 할인된 가격으로 만나보세요.
             </p>
             <div className="w-full max-w-sm space-y-2">
-              <form onSubmit={handleSubmit} className="flex space-x-2">
-                <Input
-                  placeholder="이메일을 입력하세요"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1"
-                  required
-                />
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "제출 중..." : "지금 예약하기"}
-                </Button>
-              </form>
+              <Button 
+                onClick={openTallyForm}
+                className="w-full"
+              >
+                지금 예약하기
+              </Button>
             </div>
           </div>
         </div>
