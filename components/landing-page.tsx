@@ -93,25 +93,6 @@ declare global {
 }
 
 export function LandingPage() {
-  const [email, setEmail] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    try {
-      // Simulating an API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      console.log("Email submitted:", email)
-      alert("Your email has been submitted successfully!")
-    } catch (error) {
-      console.error("Error submitting email:", error)
-      alert("There was an error submitting your email. Please try again.")
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
   // Refs for sections
   const [heroRef, heroDirection] = useScrollAnimation('left');
   const [learnRef, learnDirection] = useScrollAnimation('left');
@@ -302,8 +283,8 @@ export function LandingPage() {
             <CardContent className="flex items-start gap-4 p-6">
               <Brain className="size-8 text-primary shrink-0" />
               <div>
-                <h3 className="font-bold mb-2">AI에게 똑똑하게 질문하기</h3>
-                <p className="text-muted-foreground">AI를 제대로 활용하려면 명령을 잘 작성하는 법도 중요해요. Cursor에서 AI에게 효과적으로 질문하고 원하는 답을 얻는 방법을 익���요.</p>
+                <h3 className="font-bold mb-2">AI에게 똑똑���게 질문하기</h3>
+                <p className="text-muted-foreground">AI를 제대로 활용하려면 명령을 잘 작성하는 법도 중요해요. Cursor에서 AI에게 효과적으로 질문하고 원하는 답을 얻는 방법을 익요.</p>
               </div>
             </CardContent>
           </Card>
@@ -439,7 +420,7 @@ export function LandingPage() {
                   </div>
                 </div>
                 <p className="text-muted-foreground">
-                  "코딩과 전혀 관련 없는 업무를 하고 평생 코딩의 '코' 자도 몰랐는데, 커서 바이블을 읽고 프로젝트를 만들어보니 ��말 쉽고 간단하게 웹사이트를 만들 수 있었어요!
+                  "코딩과 전혀 관련 없는 업무를 하고 평생 코딩의 '코' 자도 몰랐는데, 커서 바이블을 읽고 프로젝트를 만들어보니 말 쉽고 간단하게 웹사이트를 만들 수 있었어요!
                   개발에 대한 두려움이 사라졌습니다."
                 </p>
               </CardContent>
