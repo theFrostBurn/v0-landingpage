@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={geistSans.className}>
       <head>
         <script async src="https://tally.so/widgets/embed.js"></script>
       </head>
